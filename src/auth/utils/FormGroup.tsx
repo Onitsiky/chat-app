@@ -11,7 +11,7 @@ export function FormGroup(props: IFormGroup) {
     return(
         <div className="form-group-container">
             <label className="fg-label">{label}:</label>
-            <input type={inputType} className="fg-input" {...register(label)}/>
+            <input type={inputType} className="fg-input" {...register(label.toLowerCase())}/>
         </div>
     )
 }
