@@ -1,8 +1,5 @@
-import SigningForm from "@/auth/components/signingForm";
+import SigningForm from '@/auth/components/signingForm'
 
 export default function Home() {
-  return (
-    <>
-    </>
-  )
+    return <></>
 }

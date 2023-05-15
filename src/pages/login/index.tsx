@@ -1,9 +1,9 @@
-import {SigningForm} from "@/auth/components/signingForm";
+import { SigningForm } from '@/auth/components/signingForm'
 
-export default function index (){
-    return(
+export default function index() {
+    return (
         <div>
-            <SigningForm/>
+            <SigningForm />
         </div>
     )
 }
