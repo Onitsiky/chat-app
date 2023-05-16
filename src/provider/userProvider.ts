@@ -6,8 +6,7 @@ export const loginUser = (data: any) => {
     const response = authApi().post('/users/login', data)
     response
         .then((res) => {
-            const data: IUserResponse = res.data
-            sessionStorage.setItem('token', data.user.token)
+            sessionStorage.setItem('token', res.data.user.token)
         })
         .catch((e) => console.error(e.message))
 }
@@ -16,8 +15,7 @@ export const createUser = (data: any) => {
     const response = authApi().post('/users', data)
     response
         .then((res) => {
-            const data: IUserResponse = res.data
-            sessionStorage.setItem('token', data.user.token)
+            sessionStorage.setItem('token', res.data.user.token)
         })
         .catch((e) => console.error(e.message))
 }

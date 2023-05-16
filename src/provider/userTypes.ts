@@ -10,7 +10,13 @@ export type IUser = {
     deletedAt: string
     token: string
 }
-export type IUserResponse = {
+export type IUserResponse = null | {
     status: boolean
     user: IUser
+}
+export interface ISignup {
+    name: string,
+    email: string,
+    password: string,
+    bio: string
 }

@@ -19,16 +19,16 @@ export function SigningForm() {
                     label="Email"
                     inputType="email"
                     register={register}
-                />
+                 errors={errors}/>
                 <FormGroup
                     label="Password"
                     inputType="password"
                     register={register}
-                />
+                 errors={errors}/>
                 <SubmitFormButton label="Sign in" />
                 <p>
                     Dont have an account ?{' '}
-                    <Link href="/signup">Create one here.</Link>
+                    <Link href="/sign-up">Create one here.</Link>
                 </p>
             </form>
         </div>
