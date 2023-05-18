@@ -25,22 +25,15 @@ export function SigningForm() {
             .catch((error) => console.error(error.message));
     }
     return(
-        <div className="signin-container">
+        <div className="rounded w-1/3 mx-auto border-gray-600 border-2 border-solid flex justify-center items-center p-6 my-48">
             <form onSubmit={handleSubmit(onSubmit)}>
-                <FormGroup
-                    label="Email"
-                    inputType="email"
-                    register={register}
-                    errors={errors}/>
-                <FormGroup
-                    label="Password"
-                    inputType="password"
-                    register={register}
-                    errors={errors}/>
+                <h3 className='text-5xl text-center p-4'>Login</h3>
+                <FormGroup label="Email" inputType="email" register={register} errors={errors}/>
+                <FormGroup label="Password" inputType="password" register={register} errors={errors}/>
                 <SubmitFormButton label="Sign in" />
                 <p>
                     Dont have an account ?{' '}
-                    <Link href="/sign-up">Create one here.</Link>
+                    <Link href="/sign-up" className='text-blue-700 hover:underline'>Create one here.</Link>
                 </p>
             </form>
         </div>
