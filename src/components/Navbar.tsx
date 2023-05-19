@@ -9,6 +9,9 @@ export function Navbar() {
     const handleMouseOut = () => {
         setIsHovering(false);
     }
+    const handleDisconnect = () => {
+        sessionStorage.clear();
+    }
     return(
         <>
             <div className='navbar-container absolute top-0 w-full bg-gray-800 py-2 px-3 text-2xl text-amber-50'>
@@ -28,7 +31,7 @@ export function Navbar() {
                         'p-2 border-2 w-44 text-lg text-amber-50 bg-gray-600 right-0 absolute rounded-lg flex justify-center' : 'hidden'}>
                         <ul>
                             <li className='hover:text-blue-700 cursor-pointer' onClick={() => router.push("/profile")}>Profile</li>
-                            <li className='hover:text-blue-700 cursor-pointer'>Disconnect</li>
+                            <li className='hover:text-blue-700 cursor-pointer' onClick={handleDisconnect}>Disconnect</li>
                         </ul>
                     </div>
                 </div>
