@@ -1,5 +1,5 @@
 import { api, authApi } from '@/provider/api'
-import { IUserInfo } from '@/provider/Types'
+import { IUser, IUserInfo } from '@/provider/Types'
 
 export const loginUser =  async (data: any) => {
     try {
@@ -20,7 +20,7 @@ export const createUser = (data: any) => {
 
 export const getUserInfo = async () => {
     try {
-        const response: IUserInfo = (await api().get("/user", {
+        const response: IUser = (await api().get("/user", {
             headers: {
                 'Accept': '*/*',
                 'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
@@ -29,5 +29,19 @@ export const getUserInfo = async () => {
         return response;
     }catch (e) {
         throw new Error('Error when getting user infos');
+    }
+}
+
+export const updateUserInfo = async (data: any) => {
+    try {
+        const response: IUser = (await api().put("/user", data, {
+            headers: {
+                'Accept': '*/*',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+            }
+        })).data;
+        return response;
+    } catch (e) {
+        throw new Error("Error on updating user infos");
     }
 }

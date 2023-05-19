@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 export function Navbar() {
+    const router = useRouter();
     const [isHovering, setIsHovering]  = useState(false);
     const handleMouseOver = () => {
         setIsHovering(true);
@@ -25,8 +27,8 @@ export function Navbar() {
                     <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} style={{zIndex:9999}}  tabIndex={-1} aria-hidden={true} className={isHovering ?
                         'p-2 border-2 w-44 text-lg text-amber-50 bg-gray-600 right-0 absolute rounded-lg flex justify-center' : 'hidden'}>
                         <ul>
-                            <li className='hover:'>Profile</li>
-                            <li>Disconnect</li>
+                            <li className='hover:text-blue-700 cursor-pointer' onClick={() => router.push("/profile")}>Profile</li>
+                            <li className='hover:text-blue-700 cursor-pointer'>Disconnect</li>
                         </ul>
                     </div>
                 </div>
