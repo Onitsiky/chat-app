@@ -22,3 +22,25 @@ export type ISignUp = {
     password: string,
     bio: string
 }
+
+enum ChannelType {
+    'private', 'public'
+}
+
+export type IChannel = {
+    id: number,
+    name: string,
+    type: ChannelType,
+    createdAt: string,
+    updatedAt: string,
+    owner: {
+        id: number,
+        name: string,
+        email: string
+    }
+}
+
+export type IChannels = null|  {
+    status: boolean,
+    channels: [IChannel]
+}

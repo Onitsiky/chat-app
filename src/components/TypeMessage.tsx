@@ -1,4 +1,7 @@
+import { useUser } from '@/state/store'
+
 export function TypeMessage() {
+    const user = useUser((state)  => state.currentUser);
     return(
         <div className='bottom-0 right-0 absolute mb-3 w-5/6'>
             <div className='p-3 border-solid border-2 rounded mr-8 cursor-pointer float-right'>

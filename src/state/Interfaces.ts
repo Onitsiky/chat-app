@@ -1,6 +1,11 @@
-import { IUser } from '@/provider/Types'
+import { IChannels, IUserInfo } from '@/provider/Types'
 
 export interface UserStore {
-    currentUser: IUser,
-    setCurrentUser: (user: IUser) => void
+    currentUser: IUserInfo | null,
+    setCurrentUser: (user: IUserInfo) => void
+}
+
+export interface ChannelStore {
+    channels: IChannels,
+    setChannels: (channels: IChannels) => void
 }

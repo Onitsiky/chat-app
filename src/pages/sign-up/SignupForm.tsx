@@ -4,9 +4,8 @@ import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { create, getInfo } from '@/provider/User'
-import { useUserStore } from '@/state/store'
-import { useEffect } from 'react'
+import { createUser, getUserInfo } from '@/provider/User'
+import { useUser } from '@/state/store'
 
 export function SignupForm() {
     const schema = yup.object().shape({
@@ -14,18 +13,22 @@ export function SignupForm() {
         email: yup.string().email('Email is invalid').required('Email is mandatory'),
         password: yup.string().required('Must define password').matches(/^(?=.*[a-zA-Z])(?=.*[^a-zA-Z])/,
             'Password must contain at least one alphabetical and one special character ').min(8, 'Password too short'),
-        "confirm password": yup.string().required('Must define password').oneOf([yup.ref('password')], "Passwords don't match"),
+        'confirm password': yup.string().required('Must define password').oneOf([yup.ref('password')], 'Passwords don\'t match'),
     })
     const { handleSubmit, register, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
         mode: 'all',
     })
-    const updateCurrentUser = useUserStore((state) => state.setCurrentUser)
+    const updateCurrentUser = useUser((state) => state.setCurrentUser)
     const onSubmit = (data: any) => {
-        create(data)
+        createUser(data)
+        getUserInfo()
+            .then((res) => updateCurrentUser(res.data.user))
+            .catch((error) => console.error(error.message))
     }
     return (
-        <div className='w-1/3 mx-auto border-solid border-gray-600 border-2 rounded flex justify-center items-center p-6 my-48'>
+        <div
+            className='w-1/3 mx-auto border-solid border-gray-600 border-2 rounded flex justify-center items-center p-6 my-48'>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <h3 className='text-5xl text-center p-4'>Sign up</h3>
                 <FormGroup label='Name' inputType='text' register={register} errors={errors} />
