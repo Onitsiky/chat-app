@@ -6,8 +6,10 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { createUser, getUserInfo } from '@/provider/User'
 import { useUser } from '@/state/store'
+import { useRouter } from 'next/router'
 
 export function SignupForm() {
+    const router = useRouter();
     const schema = yup.object().shape({
         name: yup.string().required('Name is mandatory'),
         email: yup.string().email('Email is invalid').required('Email is mandatory'),
@@ -27,6 +29,7 @@ export function SignupForm() {
                 if (res?.user){
                     updateCurrentUser(res?.user)
                 }
+                router.push("/");
             })
             .catch((error) => console.error(error.message))
     }

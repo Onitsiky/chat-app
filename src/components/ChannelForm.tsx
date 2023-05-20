@@ -32,7 +32,7 @@ export function ChannelForm() {
                 updateAllUsers(response)
             }
             getUsers()
-                .then(r => console.log(r))
+                .then(r => router.push("/"))
                 .catch(e => console.error(e))
         }
         getAllUser()

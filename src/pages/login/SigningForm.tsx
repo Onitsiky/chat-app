@@ -26,13 +26,13 @@ export function SigningForm() {
             const { user, authenticate } = await loginUser(data)
             if (authenticate && user) {
                 updateCurrentUser(user)
-                await router.push('/')
             } else {
                 console.error('User not authenticated')
             }
         }
         signing()
-            .then(r => console.log(r))
+            .then(r => router.push('/')
+            )
             .catch(e => console.error(e))
     }
     return (
