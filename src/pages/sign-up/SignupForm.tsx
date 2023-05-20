@@ -23,7 +23,11 @@ export function SignupForm() {
     const onSubmit = (data: any) => {
         createUser(data)
         getUserInfo()
-            .then((res) => updateCurrentUser(res.data.user))
+            .then((res) => {
+                if (res?.user){
+                    updateCurrentUser(res?.user)
+                }
+            })
             .catch((error) => console.error(error.message))
     }
     return (
