@@ -1,3 +1,8 @@
+export type IShowField = {
+    show: boolean,
+    setShow?: (state: boolean) => void,
+    closeShow?: () => void
+}
 export type IUserInfo = {
     id: number
     email: string

@@ -2,8 +2,8 @@ import { Navbar } from '@/components/Navbar'
 import { SideBar } from '@/components/SideBar'
 import { TypeMessage } from '@/components/TypeMessage'
 import { MessageField } from '@/components/MessageField'
-import { useAllUsers, useChannel, useUser } from '@/state/store'
-import { getAllUsers, getUserInfo } from '@/provider/User'
+import { useChannel, useUser } from '@/state/store'
+import { getUserInfo } from '@/provider/User'
 import { getChannels } from '@/provider/Channel'
 import { useEffect } from 'react'
 
@@ -11,7 +11,6 @@ export function Home() {
     const updateUser = useUser((state) => state.setCurrentUser)
     const updateChannels = useChannel((state) => state.setChannels)
     const channels = useChannel((state) => state.channels)
-    const allUsers = useAllUsers(state => state.users);
     useEffect(() => {
         const getInfo = () => {
             const getAllChannels = async () => {
