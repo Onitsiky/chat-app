@@ -28,6 +28,10 @@ export type IAllUser = null | {
     users: User[]
 }
 
+export type IMinChannel = null | {
+    id: number,
+    name: string
+}
 export type ISignUp = {
     name: string,
     email: string,

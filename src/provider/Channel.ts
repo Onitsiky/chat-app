@@ -28,3 +28,16 @@ export const createChannel = async (data: any) => {
         throw new Error('Error');
     }
 }
+
+export const addMemberToChannel = async (channelId: number | null, data: any) => {
+    try {
+        const response = (await api().post(`/channels/${channelId}/members`, data, {
+            headers: {
+                'Accept': '*/*',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+            },
+        }))
+    }catch (e) {
+        throw new Error('Error');
+    }
+}

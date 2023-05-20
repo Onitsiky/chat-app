@@ -1,7 +1,7 @@
 import { Channel } from '@/components/Channel'
 import { IChannels } from '@/provider/Types'
-import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { useMinChannel } from '@/state/store'
 
 type ISideBar = {
     channelList: IChannels;
@@ -9,8 +9,15 @@ type ISideBar = {
 
 export function SideBar({ channelList }: ISideBar) {
     const router = useRouter();
+    const setChannelId = useMinChannel(state => state.setChannelId);
+    const setChannelName = useMinChannel(state => state.setChannelName);
     const handleCreate = () => {
         router.push('/create-channel').then(r => console.log(r));
+    }
+    const handleAddMembers = (channelId: number, channelName: string) => {
+        setChannelId(channelId);
+        setChannelName(channelName);
+        router.push("/add-member").then(r => console.log(r));
     }
     return (
         <div className='w-1/6 bg-gray-800 bottom-0 fixed h-128 overflow-scroll flex flex-col'>
@@ -27,8 +34,13 @@ export function SideBar({ channelList }: ISideBar) {
             <div>
                 {channelList?.channels.map((channel, index) => {
                     return (
-                        <Channel initial={channel.name.charAt(0).toUpperCase()} name={channel.name} key={index} />
-                    )
+                        <div key={index} className='flex flex-row'>
+                            <Channel initial={channel.name.charAt(0).toUpperCase()} name={channel.name} key={index} />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-white mt-10 hover:text-blue-700 ml-1 cursor-pointer" onClick={() => handleAddMembers(channel.id, channel.name)}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                )
                 })}
             </div>
         </div>
