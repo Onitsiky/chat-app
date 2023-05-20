@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { ChannelStore, UserStore } from '@/state/Interfaces'
+import { ChannelStore, UsersStore, UserStore } from '@/state/Interfaces'
 
 export const useUser = create<UserStore>()((set) => ({
     currentUser: null,
@@ -12,5 +12,12 @@ export const useChannel = create<ChannelStore>()((set) => ({
     channels: null,
     setChannels: (toSet) => set(state => ({
         channels: toSet
+    }))
+}))
+
+export const useAllUsers = create<UsersStore>()((set) => ({
+    users: null,
+    setUsers: (toSet) => set(state => ({
+        users: toSet
     }))
 }))

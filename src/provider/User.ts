@@ -1,5 +1,5 @@
 import { api, authApi } from '@/provider/api'
-import { IUser, IUserInfo } from '@/provider/Types'
+import { IAllUser, IUser, IUserInfo } from '@/provider/Types'
 
 export const loginUser =  async (data: any) => {
     try {
@@ -29,6 +29,20 @@ export const getUserInfo = async () => {
         return response;
     }catch (e) {
         throw new Error('Error when getting user infos');
+    }
+}
+
+export const getAllUsers = async () => {
+    try {
+        const response: IAllUser = (await api().get("/users", {
+            headers: {
+                'Accept': '*/*',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+            }
+        })).data;
+        return response;
+    }catch (e) {
+        throw new Error('Error when getting all users');
     }
 }
 

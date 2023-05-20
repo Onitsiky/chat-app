@@ -11,9 +11,21 @@ export type IUserInfo = {
     token: string
 }
 
+export type User = {
+    id: number
+    email: string
+    name: string
+    bio: string
+}
+
 export type IUser = null | {
     status: boolean,
     user: IUserInfo
+}
+
+export type IAllUser = null | {
+    status: boolean,
+    users: User[]
 }
 
 export type ISignUp = {
@@ -43,4 +55,15 @@ export type IChannel = {
 export type IChannels = null|  {
     status: boolean,
     channels: [IChannel]
+}
+export type createdChannel = null | {
+    status: boolean,
+    channel: {
+        id: number,
+        name: string,
+        type: string
+        ownerId: number,
+        updatedAt: string,
+        createdAt: string
+    }
 }
