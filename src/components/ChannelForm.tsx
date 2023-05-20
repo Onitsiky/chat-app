@@ -22,7 +22,7 @@ export function ChannelForm() {
             const response = await createChannel(data)
         }
         saveChannel()
-            .then(r => console.log(r))
+            .then(r => router.push("/"))
             .catch(e => console.error(e))
     }
     useEffect(() => {
@@ -32,7 +32,7 @@ export function ChannelForm() {
                 updateAllUsers(response)
             }
             getUsers()
-                .then(r => router.push("/"))
+                .then(r => console.log(r))
                 .catch(e => console.error(e))
         }
         getAllUser()

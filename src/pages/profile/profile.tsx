@@ -38,7 +38,7 @@ export function Profile() {
                 }
             }
             getUser()
-                .then(r => router.push("/"))
+                .then(r => console.log(r))
                 .catch(e => console.error(e))
         }
         getInfo()
@@ -62,6 +62,7 @@ export function Profile() {
             if (response?.user){
                 updateUser(response.user);
                 sessionStorage.setItem('token', response.user.token);
+                router.push("/")
             } else {
                 console.error("Update user info failed");
             }
