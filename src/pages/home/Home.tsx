@@ -2,20 +2,24 @@ import { Navbar } from '@/components/Navbar'
 import { SideBar } from '@/components/SideBar'
 import { TypeMessage } from '@/components/TypeMessage'
 import { MessageField } from '@/components/MessageField'
-import { useChannel, useUser } from '@/state/store'
+import { useChannel, useCurrentChannel, useUser } from '@/state/store'
 import { getUserInfo } from '@/provider/User'
 import { getChannels } from '@/provider/Channel'
 import { useEffect } from 'react'
 
 export function Home() {
     const updateUser = useUser((state) => state.setCurrentUser)
-    const updateChannels = useChannel((state) => state.setChannels)
-    const channels = useChannel((state) => state.channels)
+    const { channels, setChannels } = useChannel()
+    const { currentChannel, setCurrentChannel } = useCurrentChannel()
     useEffect(() => {
         const getInfo = () => {
             const getAllChannels = async () => {
                 const channels = await getChannels()
-                updateChannels(channels)
+                setChannels(channels)
+                if (channels != null) {
+                    setCurrentChannel(channels.channels[0])
+                    console.log(currentChannel?.name);
+                }
             }
             const getUser = async () => {
                 const user = await getUserInfo()
@@ -24,10 +28,10 @@ export function Home() {
                 }
             }
             getAllChannels()
-                .then(r => console.log(r))
+                .then(r => console.log("All channels ok"))
                 .catch(e => console.error(e))
             getUser()
-                .then(r => console.log(r))
+                .then(r => console.log("Get user ok"))
                 .catch(e => console.error(e))
         }
         getInfo()

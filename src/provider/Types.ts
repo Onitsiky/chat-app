@@ -76,3 +76,23 @@ export type createdChannel = null | {
         createdAt: string
     }
 }
+
+export type IMessage = null | {
+    id: number,
+    content: string,
+    createdAt: string,
+    updatedAt: string,
+    senderId: number,
+    recipientId: number | null,
+    channelId: number | null,
+    sender: {
+        id: number,
+        name: string,
+        email: string
+    }
+}
+
+export type IMessages = null | {
+    status: boolean,
+    messages: [IMessage]
+}

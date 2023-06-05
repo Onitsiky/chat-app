@@ -1,5 +1,13 @@
 import { create } from 'zustand'
-import { ChannelIdStore, ChannelStore, UsersStore, UserStore } from '@/state/Interfaces'
+import {
+    ChannelIdStore,
+    ChannelMessagesStore,
+    ChannelStore,
+    CreateMessageStore, CurrentChannelStore,
+    UsersStore,
+    UserStore,
+} from '@/state/Interfaces'
+import { set } from 'react-hook-form'
 
 export const useUser = create<UserStore>()((set) => ({
     currentUser: null,
@@ -15,6 +23,12 @@ export const useChannel = create<ChannelStore>()((set) => ({
     }))
 }))
 
+export const useCurrentChannel = create<CurrentChannelStore>()((set) => ({
+    currentChannel: null,
+    setCurrentChannel: (toSet) => set(state => ({
+        currentChannel: toSet
+    }))
+}))
 export const useAllUsers = create<UsersStore>()((set) => ({
     users: null,
     setUsers: (toSet) => set(state => ({
@@ -33,3 +47,17 @@ export const useMinChannel = create<ChannelIdStore>()((set) => ({
     }))
     })
 )
+
+export const useCreateMessage = create<CreateMessageStore>()((set) =>({
+    message: "",
+    setMessage: (toSet) => set(state => ({
+        message: toSet
+    }))
+}))
+
+export const useChannelMessage = create<ChannelMessagesStore>()((set) => ({
+    messages: null,
+    setMessages: (messagesToSet) => set(state => ({
+        messages: messagesToSet
+    }))
+}))
