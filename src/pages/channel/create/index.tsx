@@ -1,4 +1,4 @@
-import { CreateChannel } from '@/pages/create-channel/CreateChannel'
+import { CreateChannel } from '@/pages/channel/create/CreateChannel'
 
 export default function CreateChannelForm() {
     return(

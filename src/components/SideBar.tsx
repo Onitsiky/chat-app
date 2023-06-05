@@ -12,7 +12,7 @@ export function SideBar({ channelList }: ISideBar) {
     const setChannelId = useMinChannel(state => state.setChannelId);
     const setChannelName = useMinChannel(state => state.setChannelName);
     const handleCreate = () => {
-        router.push('/create-channel').then(r => console.log(r));
+        router.push('/channel/create').then(r => console.log(r));
     }
     const handleAddMembers = (channelId: number, channelName: string) => {
         setChannelId(channelId);
