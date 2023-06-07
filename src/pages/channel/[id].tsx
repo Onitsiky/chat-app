@@ -6,6 +6,7 @@ import { useChannel, useCurrentChannel, useUser } from '@/state/store'
 import { getUserInfo } from '@/provider/User'
 import { getChannels } from '@/provider/Channel'
 import { useEffect } from 'react'
+import { Authenticated } from '@/auth/auth-context'
 
 export default function Id() {
     const updateUser = useUser((state) => state.setCurrentUser)
@@ -37,11 +38,11 @@ export default function Id() {
         getInfo()
     }, [])
     return (
-        <div>
+        <Authenticated>
             <Navbar />
             <SideBar channelList={channels} />
             <MessageField />
             <TypeMessage />
-        </div>
+        </Authenticated>
     )
 }

@@ -5,6 +5,7 @@ import { getChannels } from '@/provider/Channel'
 import { getUserInfo } from '@/provider/User'
 import { Navbar } from '@/components/Navbar'
 import { SideBar } from '@/components/SideBar'
+import { Authenticated } from '@/auth/auth-context'
 
 export default function Home() {
     const updateUser = useUser((state) => state.setCurrentUser)
@@ -33,10 +34,10 @@ export default function Home() {
         getInfo()
     }, [])
     return (
-        <div>
+        <Authenticated>
             <Navbar/>
             <SideBar channelList={channels} />
             <Profile />
-        </div>
+        </Authenticated>
     )
 }
