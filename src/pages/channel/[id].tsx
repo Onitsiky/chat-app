@@ -7,7 +7,7 @@ import { getUserInfo } from '@/provider/User'
 import { getChannels } from '@/provider/Channel'
 import { useEffect } from 'react'
 
-export function Home() {
+export default function Id() {
     const updateUser = useUser((state) => state.setCurrentUser)
     const { channels, setChannels } = useChannel()
     const { currentChannel, setCurrentChannel } = useCurrentChannel()

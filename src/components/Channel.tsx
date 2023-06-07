@@ -1,5 +1,6 @@
 import { useCurrentChannel } from '@/state/store'
 import { IChannel } from '@/provider/Types'
+import { useRouter } from 'next/router'
 
 type IChannelComponent = {
     channel: IChannel,
@@ -7,11 +8,13 @@ type IChannelComponent = {
 }
 
 export function Channel({ channel, key }: IChannelComponent) {
+    const router = useRouter();
     const updateCurrentChannel = useCurrentChannel(state => state.setCurrentChannel)
 
     function handleUpdateCurrentChannel(channel: IChannel) {
         updateCurrentChannel(channel)
         console.log(`Current Channel is ${channel.name} with id ${channel.id}`)
+        router.push(`/channel/${channel.id}`);
     }
 
     return (

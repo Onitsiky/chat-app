@@ -11,11 +11,15 @@ export function Navbar() {
     }
     const handleDisconnect = () => {
         sessionStorage.clear();
+        router.push("/login")
+    }
+    const returnHome = () => {
+        router.push("/");
     }
     return(
         <>
             <div className='navbar-container absolute top-0 w-full bg-gray-800 py-2 px-3 text-2xl text-amber-50'>
-                <div className='float-left px-10 flex flex-row'>
+                <div className='float-left px-10 flex flex-row cursor-pointer' onClick={returnHome}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 hover:text-blue-500 cursor-pointer">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
                     </svg>
