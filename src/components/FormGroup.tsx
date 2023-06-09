@@ -8,11 +8,12 @@ interface IFormGroup
     register: UseFormRegister<FieldValues>,
     errors: FieldErrors<FieldValues>,
     defaultValue?: string,
-    readOnly?: boolean
+    readOnly?: boolean,
+    name: string
 }
 
 export function FormGroup(props: IFormGroup) {
-    const { readOnly, defaultValue, label, inputType, register, errors: _errors } = props
+    const { readOnly, defaultValue, label, inputType, register, errors: _errors, name } = props
     const errors = _errors as {[key:string] : {message: string}};
     return (
         <div className="form-group-container p-1">
@@ -20,14 +21,15 @@ export function FormGroup(props: IFormGroup) {
             <input
                 type={inputType}
                 defaultValue={defaultValue}
-                className={errors[label.toLowerCase()]
+                className={errors[name]
                     ? "border-solid border-2 border-red-800 rounded-md p-1 w-full"
                     : "border-solid border-2 border-gray-600 rounded-md p-1 w-full"}
-                {...register(label.toLowerCase())}
+                {...register(name)}
                 readOnly={readOnly}
                 placeholder={label}
+                name={name}
             />
-            {errors[label.toLowerCase()] && <div className='text-red-900'>{errors[label.toLowerCase()].message}</div>}
+            {errors[name] && <div className='text-red-900'>{errors[name].message}</div>}
         </div>
     )
 }
