@@ -1,9 +1,10 @@
-import { useCreateMessage, useCurrentChannel } from '@/state/store'
+import { useCreateMessage, useCurrentChannel, useCurrentFriend } from '@/state/store'
 import { sendMessage } from '@/provider/Message'
 import { FormEvent } from 'react'
 
 export function TypeMessage() {
     const { message ,setMessage } = useCreateMessage()
+    const currentFriend = useCurrentFriend(state => state.currentFriend);
     const currentChannel = useCurrentChannel(state => state.currentChannel);
     const handleOnChange = (e: any) => {
         setMessage(e.target.value)
@@ -21,7 +22,7 @@ export function TypeMessage() {
         else {
             messageData = {
                 "channelId": null,
-                "recipientId": 2,
+                "recipientId": currentFriend?.id,
                 "content": message
             }
         }

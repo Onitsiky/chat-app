@@ -1,14 +1,24 @@
 import { Navbar } from '@/components/Navbar'
 import { SideBar } from '@/components/SideBar'
-import { useChannel, useCurrentChannel, useUser } from '@/state/store'
+import { useAllUsers, useChannel, useCurrentChannel, useCurrentFriend, useUser } from '@/state/store'
 import { useEffect } from 'react'
 import { getChannels } from '@/provider/Channel'
-import { getUserInfo } from '@/provider/User'
+import { getAllUsers, getUserInfo } from '@/provider/User'
+import { Authenticated } from '@/auth/auth-context'
 export default function Home() {
     const updateUser = useUser((state) => state.setCurrentUser)
     const { channels, setChannels } = useChannel()
     const { currentChannel, setCurrentChannel } = useCurrentChannel()
+    const { users, setUsers } = useAllUsers();
+    const updateCurrentFriend = useCurrentFriend(state => state.setCurrentFriend);
     useEffect(() => {
+        const getUsers = async () => {
+            const response = await getAllUsers();
+            setUsers(response);
+            if (response != null) {
+                updateCurrentFriend(response.users[0])
+            }
+        }
         const getInfo = () => {
             const getAllChannels = async () => {
                 const channels = await getChannels()
@@ -30,13 +40,16 @@ export default function Home() {
             getUser()
                 .then(r => console.log("Get user ok"))
                 .catch(e => console.error(e))
+            getUsers()
+                .then(r => console.log("Get all users ok"))
+                .catch(e => console.error(e))
         }
         getInfo()
     }, [])
     return(
-        <>
+        <Authenticated>
             <Navbar/>
-            <SideBar channelList={channels}/>
-        </>
+            <SideBar channelList={channels} userList={users}/>
+        </Authenticated>
     )
 }

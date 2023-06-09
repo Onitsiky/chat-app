@@ -1,4 +1,14 @@
-import { IAllUser, IChannel, IChannels, IMessage, IMessages, IMinChannel, IUserInfo } from '@/provider/Types'
+import {
+    IAllUser,
+    IChannel,
+    IChannels,
+    IMessage,
+    IMessages,
+    IMinChannel,
+    IUser,
+    IUserInfo,
+    User,
+} from '@/provider/Types'
 
 export interface UserStore {
     currentUser: IUserInfo | null,
@@ -12,7 +22,12 @@ export interface ChannelStore {
 
 export interface CurrentChannelStore {
     currentChannel: IChannel | null,
-    setCurrentChannel: (channel: IChannel) => void
+    setCurrentChannel: (channel: IChannel | null) => void
+}
+
+export interface CurrentFriend {
+    currentFriend: User | null,
+    setCurrentFriend: (user: User) => void
 }
 export interface UsersStore {
     users: IAllUser,

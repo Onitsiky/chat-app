@@ -1,21 +1,12 @@
-import { useEffect } from 'react'
-import jwt from 'jsonwebtoken'
+import { PropsWithChildren, ReactNode, useEffect } from 'react'
+import {verify, } from 'jsonwebtoken'
 import { useRouter } from 'next/router'
 
-export function Authenticated(children: any) {
+export function Authenticated({ children }: PropsWithChildren) {
     const router = useRouter();
     useEffect(() => {
         const isTokenValid = () => {
-            const token = sessionStorage.getItem("token");
-            if(token != null) {
-                try {
-                    const decoded = jwt.verify(token, '1234');
-                    return true;
-                }catch (error) {
-                    return false;
-                }
-            }
-            return false;
+            return sessionStorage.getItem("token") != null;
         }
         if (!isTokenValid()) {
             router.replace("/login")

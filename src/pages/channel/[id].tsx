@@ -2,8 +2,8 @@ import { Navbar } from '@/components/Navbar'
 import { SideBar } from '@/components/SideBar'
 import { TypeMessage } from '@/components/TypeMessage'
 import { MessageField } from '@/components/MessageField'
-import { useChannel, useCurrentChannel, useUser } from '@/state/store'
-import { getUserInfo } from '@/provider/User'
+import { useAllUsers, useChannel, useCurrentChannel, useCurrentFriend, useUser } from '@/state/store'
+import { getAllUsers, getUserInfo } from '@/provider/User'
 import { getChannels } from '@/provider/Channel'
 import { useEffect } from 'react'
 import { Authenticated } from '@/auth/auth-context'
@@ -12,8 +12,17 @@ export default function Id() {
     const updateUser = useUser((state) => state.setCurrentUser)
     const { channels, setChannels } = useChannel()
     const { currentChannel, setCurrentChannel } = useCurrentChannel()
+    const {users, setUsers} = useAllUsers()
+    const updateCurrentFriend = useCurrentFriend(state => state.setCurrentFriend);
     useEffect(() => {
         const getInfo = () => {
+            const getUsers = async () => {
+                const response = await getAllUsers();
+                setUsers(response);
+                if (response != null) {
+                    updateCurrentFriend(response.users[0])
+                }
+            }
             const getAllChannels = async () => {
                 const channels = await getChannels()
                 setChannels(channels)
@@ -28,6 +37,9 @@ export default function Id() {
                     updateUser(user?.user)
                 }
             }
+            getUsers()
+                .then(r => console.log(r))
+                .catch(e => console.error(e))
             getAllChannels()
                 .then(r => console.log("All channels ok"))
                 .catch(e => console.error(e))
@@ -40,7 +52,7 @@ export default function Id() {
     return (
         <Authenticated>
             <Navbar />
-            <SideBar channelList={channels} />
+            <SideBar channelList={channels}  userList={users}/>
             <MessageField />
             <TypeMessage />
         </Authenticated>

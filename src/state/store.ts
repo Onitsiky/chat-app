@@ -3,7 +3,7 @@ import {
     ChannelIdStore,
     ChannelMessagesStore,
     ChannelStore,
-    CreateMessageStore, CurrentChannelStore,
+    CreateMessageStore, CurrentChannelStore, CurrentFriend,
     UsersStore,
     UserStore,
 } from '@/state/Interfaces'
@@ -27,6 +27,13 @@ export const useCurrentChannel = create<CurrentChannelStore>()((set) => ({
     currentChannel: null,
     setCurrentChannel: (toSet) => set(state => ({
         currentChannel: toSet
+    }))
+}))
+
+export const useCurrentFriend = create<CurrentFriend>()((set) => ({
+    currentFriend: null,
+    setCurrentFriend: (toSet) => set(state => ({
+        currentFriend: toSet
     }))
 }))
 export const useAllUsers = create<UsersStore>()((set) => ({

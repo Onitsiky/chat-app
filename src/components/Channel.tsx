@@ -18,7 +18,7 @@ export function Channel({ channel, key }: IChannelComponent) {
     }
 
     return (
-        <div key={key} className='flex flex-row mt-10 cursor-pointer' onClick={() => handleUpdateCurrentChannel(channel)}>
+        <div key={key} className='flex flex-row mt-4 cursor-pointer' onClick={() => handleUpdateCurrentChannel(channel)}>
             <div className='ml-4 text-lg bg-white pr-3 pl-1 my-auto rounded text-center hover:bg-blue-700'>
                 {channel.name} #
             </div>

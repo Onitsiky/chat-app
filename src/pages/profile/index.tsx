@@ -11,7 +11,7 @@ export default function Home() {
     const updateUser = useUser((state) => state.setCurrentUser)
     const updateChannels = useChannel((state) => state.setChannels)
     const channels = useChannel((state) => state.channels)
-    const allUsers = useAllUsers(state => state.users);
+    const users = useAllUsers(state => state.users)
     useEffect(() => {
         const getInfo = () => {
             const getAllChannels = async () => {
@@ -36,7 +36,7 @@ export default function Home() {
     return (
         <Authenticated>
             <Navbar/>
-            <SideBar channelList={channels} />
+            <SideBar channelList={channels}  userList={users}/>
             <Profile />
         </Authenticated>
     )
