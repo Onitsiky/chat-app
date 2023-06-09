@@ -38,11 +38,11 @@ export function SignupForm() {
             className='w-1/3 mx-auto border-solid border-gray-600 border-2 rounded flex justify-center items-center p-6 my-48'>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <h3 className='text-5xl text-center p-4'>Sign up</h3>
-                <FormGroup label='Name' inputType='text' register={register} errors={errors} name='name'/>
-                <FormGroup label='Email' inputType='email' register={register} errors={errors} name='email'/>
-                <FormGroup label='Password' inputType='password' register={register} errors={errors} name='password'/>
-                <FormGroup label='Confirm password' inputType='password' register={register} errors={errors} name='confirmPassword'/>
-                <FormGroup label='Bio' inputType='text-area' register={register} errors={errors} name='register'/>
+                <FormGroup label='Name' inputType='text' register={register} errors={errors} name='name' formName='name'/>
+                <FormGroup label='Email' inputType='email' register={register} errors={errors} name='email' formName='email'/>
+                <FormGroup label='Password' inputType='password' register={register} errors={errors} name='password' formName='password'/>
+                <FormGroup label='Confirm password' inputType='password' register={register} errors={errors} name='confirmPassword' formName='confirmPassword'/>
+                <FormGroup label='Bio' inputType='text-area' register={register} errors={errors} name='bio' formName='bio'/>
                 <SubmitFormButton label='Register' className='registerButton'/>
                 <p>
                     Already have an account ?{' '}

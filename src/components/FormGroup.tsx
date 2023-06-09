@@ -9,11 +9,12 @@ interface IFormGroup
     errors: FieldErrors<FieldValues>,
     defaultValue?: string,
     readOnly?: boolean,
-    name: string
+    name: string,
+    formName: string
 }
 
 export function FormGroup(props: IFormGroup) {
-    const { readOnly, defaultValue, label, inputType, register, errors: _errors, name } = props
+    const { readOnly, defaultValue, label, inputType, register, errors: _errors, name, formName } = props
     const errors = _errors as {[key:string] : {message: string}};
     return (
         <div className="form-group-container p-1">
@@ -21,15 +22,15 @@ export function FormGroup(props: IFormGroup) {
             <input
                 type={inputType}
                 defaultValue={defaultValue}
-                className={errors[name]
+                className={errors[formName]
                     ? "border-solid border-2 border-red-800 rounded-md p-1 w-full"
                     : "border-solid border-2 border-gray-600 rounded-md p-1 w-full"}
-                {...register(name)}
+                {...register(formName)}
                 readOnly={readOnly}
                 placeholder={label}
                 name={name}
             />
-            {errors[name] && <div className='text-red-900'>{errors[name].message}</div>}
+            {errors[formName] && <div className='text-red-900'>{errors[formName].message}</div>}
         </div>
     )
 }

@@ -55,12 +55,14 @@ export function ChannelForm() {
                         </svg>
                     </div>
                 </div>
-                <FormGroup label='Name' inputType='text' register={register} errors={errors} />
+                <FormGroup label='Name' inputType='text' register={register} errors={errors}  name='name' formName='name'/>
                 <div className='form-select-container p-1'>
                     <label className='fg-label'>Type:</label><br />
                     <select
                         className='border-solid border-2 border-gray-600 rounded-md p-1 w-full'
-                        {...register('type')}>
+                        {...register('type')}
+                        name="type"
+                    >
                         {options.map((item, index) => (
                             <option key={index} value={item}>{item}</option>
                         ))}
@@ -68,7 +70,7 @@ export function ChannelForm() {
                 </div>
                 <FormSelect label='Members' register={register} options={usersList} />
                 <div className='flex flex-row ml-3 '>
-                    <SubmitFormButton label='Create' />
+                    <SubmitFormButton label='Create Channel' className="createChannelButton"/>
                     <div className='form-button-container pt-3 pb-3 ml-3'>
                         <button type='button' className=' border-2 border-solid border-gray-400 p-2 rounded-md text-md'
                                 onClick={handleCancel}>
