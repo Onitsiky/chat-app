@@ -44,14 +44,14 @@ export function TypeMessage() {
                 sendWrittenMessage(e);
             }}>
                 <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5}
-                     stroke='currentColor' className='w-10 h-10'>
+                     stroke='currentColor' className='w-10 h-10 sendMessageButton'>
                     <path strokeLinecap='round' strokeLinejoin='round'
                           d='M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5' />
                 </svg>
             </div>
             <div className='border-solid border-2 rounded mx-8 w-3/4 fixed'>
-                <input type='text' className='w-full h-16 p-3' placeholder='Type message...'
-                       onChange={(e) => handleOnChange(e)} />
+                <textarea className='w-full h-16 p-3' name='message' placeholder='Type message...'
+                          onChange={(e) => handleOnChange(e)}></textarea>
             </div>
         </form>
     )
