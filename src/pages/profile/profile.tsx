@@ -14,14 +14,10 @@ type IProfile = {
 export function Profile() {
     const router = useRouter();
     const updateUser = useUser((state) => state.setCurrentUser);
-    const [nameReadOnly, setNameReadOnly] = useState(true);
-    const [emailReadOnly, setEmailReadOnly] = useState(true);
-    const [bioReadOnly, setBioReadOnly] = useState(true);
-    const [passwdReadOnly, setPasswdReadOnly] = useState(true);
     const schema = yup.object().shape({
         name: yup.string(),
         email: yup.string().email(),
-        bio: yup.string()
+        bio: yup.string(),
     })
     const {handleSubmit, register, formState: {errors}} = useForm({
         resolver: yupResolver(schema),
@@ -44,18 +40,6 @@ export function Profile() {
         getInfo()
     }, [])
     const user = useUser(state => state.currentUser);
-    const handleNameEdit = () => {
-        setNameReadOnly(false);
-    }
-    const handleEmailEdit = () => {
-        setEmailReadOnly(false);
-    }
-    const handleBioEdit = () => {
-        setBioReadOnly(false);
-    }
-    const handlePasswordEdit = () => {
-        setPasswdReadOnly(false);
-    }
     const onSubmit = (data: any) => {
         const updateUserInfos = async () => {
             const response = await updateUserInfo(data);
@@ -83,34 +67,37 @@ export function Profile() {
                     </svg>
                 </div>
                 <div className='flex flex-row'>
-                    <FormGroup label="Name" inputType="text" register={register} errors={errors} defaultValue={user?.name} readOnly={nameReadOnly} />
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 mt-6 cursor-pointer hover:text-blue-700" onClick={handleNameEdit}>
+                    <FormGroup label="Name" inputType="text" register={register} errors={errors} defaultValue={user?.name}  formName='name' name='name'/>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 mt-6 cursor-pointer hover:text-blue-700">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                     </svg>
                 </div>
                 <div className='flex flex-row'>
-                    <FormGroup label="Email" inputType="email" register={register} errors={errors} defaultValue={user?.email} readOnly={emailReadOnly} />
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 mt-6 cursor-pointer hover:text-blue-700" onClick={handleEmailEdit}>
+                    <FormGroup label="Email" inputType="email" register={register} errors={errors} defaultValue={user?.email}  formName='email' name='email'/>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 mt-6 cursor-pointer hover:text-blue-700">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                     </svg>
                 </div>
                 <div className='flex flex-row'>
-                    <FormGroup label="Bio" inputType="text" register={register} errors={errors} defaultValue={user?.bio} readOnly={bioReadOnly} />
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 mt-6 cursor-pointer hover:text-blue-700" onClick={handleBioEdit}>
+                    <FormGroup label="Current password" inputType="password" register={register} errors={errors} formName='oldPassword' name='currentPassword'/>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 mt-6 cursor-pointer hover:text-blue-700" >
                         <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                     </svg>
                 </div>
                 <div className='flex flex-row'>
-                    <FormGroup label="OldPassword" inputType="password" register={register} errors={errors} readOnly={passwdReadOnly} />
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 mt-6 cursor-pointer hover:text-blue-700" onClick={handlePasswordEdit}>
+                    <FormGroup label="New password" inputType="password" register={register} errors={errors} formName='password' name='newPassword'/>
+                </div>
+                <div>
+                    <FormGroup label='Confirm password' inputType="password" register={register} errors={errors} name='confirmPassword' formName='confirmPassword'/>
+                </div>
+                <div className='flex flex-row'>
+                    <FormGroup label="Bio" inputType="text" register={register} errors={errors} defaultValue={user?.bio} formName='bio' name='bio'/>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 mt-6 cursor-pointer hover:text-blue-700" >
                         <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                     </svg>
                 </div>
-                <div className={passwdReadOnly ? 'hidden' : 'flex flex-row'}>
-                    <FormGroup label="Password" inputType="password" register={register} errors={errors} readOnly={passwdReadOnly} />
-                </div>
-                <div className={!passwdReadOnly || !bioReadOnly || !nameReadOnly || !emailReadOnly? 'flex flex-row' : 'hidden'}>
-                    <SubmitFormButton label="Save"/>
+                <div className='flex flex-row'>
+                    <SubmitFormButton label="Update Profile" className='updateProfileButton'/>
                 </div>
                 <button type="button" className="fb-button border-2 border-solid border-gray-400 p-2 rounded-md text-md" onClick={handleCancel}>
                     Cancel
